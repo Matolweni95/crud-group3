@@ -3,28 +3,28 @@ import Signin from "./Componenets/js/Signin";
 import Dashboard from "./Componenets/js/Dashboard";
 import Navbar from "./Componenets/js/Navbar";
 import Sidenav from "./Componenets/js/Sidenav";
+import Teacher from "./Componenets/js/Teacher";
 import { useState } from "react";
 import Classcard from "./Componenets/js/Classcard";
 
-
 function App() {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <BrowserRouter>
-     {!isLoggedIn && <Signin setIsLoggedIn={setIsLoggedIn} />}
+      {!isLoggedIn && <Signin setIsLoggedIn={setIsLoggedIn} />}
       {isLoggedIn && (
-     <div>
-      <Navbar />
-      <Sidenav >
-        <Routes>
-          <Route path="/dashboard" element = { <Dashboard /> } />
-          <Route path="/class" element = { <Classcard /> } />
-        </Routes>
-      </Sidenav>
-     </div>
-        )}
+        <div>
+          <Navbar />
+          <Sidenav>
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/class" element={<Classcard />} />
+              <Route path="/teacher" element={<Teacher />} />
+            </Routes>
+          </Sidenav>
+        </div>
+      )}
     </BrowserRouter>
   );
 }
