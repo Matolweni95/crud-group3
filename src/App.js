@@ -4,6 +4,7 @@ import Dashboard from "./Componenets/js/Dashboard";
 import Navbar from "./Componenets/js/Navbar";
 import Sidenav from "./Componenets/js/Sidenav";
 import { useState } from "react";
+import Classcard from "./Componenets/js/Classcard";
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
       <Navbar />
       <Sidenav >
         <Routes>
-          <Route path="/" element = { <Dashboard /> } />
+          <Route path="/dashboard" element = { <Dashboard /> } />
+          <Route path="/class" element = { <Classcard /> } />
         </Routes>
       </Sidenav>
      </div>

@@ -29,9 +29,9 @@ const handleLogin = () => {
               <input type="password" id="password" name="password" required="" />
             </div>
             <div className="form__group">
-             
-            <button onClick={handleLogin} className="login__button">Login</button>
-        
+            <Link to= "/dashboard">
+                <button onClick={handleLogin} className="login__button">Login</button>
+            </Link>
             </div>
           </form>
         </div>
