@@ -17,7 +17,7 @@ const Sidenav = ({children}) => {
                     <Link to = "/class" >
                         Classes
                     </Link>
-                    <Link to = "/classes" >
+                    <Link to = "/teacher" >
                         Teachers
                     </Link>
                     <Link to = "/classes" >
