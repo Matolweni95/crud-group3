@@ -11,7 +11,7 @@ const Sidenav = ({ children }) => {
             <ul className="list-unstyled" id="homeSubmenu">
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/class">Classes</Link>
-              <Link to="./Teacher">Teachers</Link>
+              <Link to="./TeacherClass">Teachers</Link>
               <Link to="/classes">Learners</Link>
             </ul>
           </li>
@@ -20,6 +20,7 @@ const Sidenav = ({ children }) => {
       <div className="contents">{children}</div>
     </div>
   );
+  <th>Class 1</th>;
 };
 
 export default Sidenav;
