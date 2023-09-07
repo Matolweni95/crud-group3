@@ -1,5 +1,22 @@
 table {
+  /* background-color: black; */
+  /* color: aliceblue; */
+  border: 2px solid black;
+}
+.row-headers {
+  display: flex;
+  flex-direction: column;
+}
+td {
+  border: 2px solid black;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.container {
   display: flex;
   justify-content: center;
-  background-color: black;
+  flex-direction: column;
+  width: 400px;
+  height: 400px;
 }

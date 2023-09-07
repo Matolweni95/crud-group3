@@ -20,7 +20,7 @@ function App() {
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/class" element={<Classcard />} />
-              <Route path="/teacher" element={<TeacherClass />} />
+              <Route path="/teacherclass" element={<TeacherClass />} />
             </Routes>
           </Sidenav>
         </div>
