@@ -13,6 +13,7 @@ const Navbar = () => {
                     <i className="fa fa-code"></i>
                 </Link>
                 <ul className= "nav__menu nav__menu">
+                    <h1>hi</h1>
                     <Signout />
                 </ul>
                 <div className="nav__icon">
