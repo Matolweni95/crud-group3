@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../css/Signin.css';
 import { Link } from 'react-router-dom';
 import { supabase } from './Supabase.js';
@@ -15,7 +15,7 @@ const Signin = ({setIsLoggedIn}) => {
 
 const handleLogin = async () => {
   //const name = document.getElementById('username').value; // Get username from user input
-  //const password = document.getElementById('password').value; // Get password from user input
+  const password = document.getElementById('password').value; // Get password from user input
 
   try {
   
