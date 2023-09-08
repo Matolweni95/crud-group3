@@ -17,7 +17,7 @@ function LearnerList({ learners }) {
                     <p>Learner1</p>
                 </div>
                 <div className='icons'>
-                    <Link to='/LearnerList'>View</Link>
+                    <Link to='/teacher'>View</Link>
                     <i onClick={() => handleDeleteClick()}>Delete</i>
                 </div>
 
