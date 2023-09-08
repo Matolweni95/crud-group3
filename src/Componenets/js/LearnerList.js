@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 
 function LearnerList({ learners }) {
     const handleDeleteClick = (index) => {
-        // You can implement the delete functionality here, e.g., by removing the learner from the list.
-        // This is just a placeholder function.
+       
         console.log(`Delete button clicked for learner at index ${index}`);
     };
 
