@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from './Navbar';
-import Sidenav from './Sidenav';
 import '../css/Admin.css'
 
 const Dashboard = () => {

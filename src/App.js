@@ -3,9 +3,11 @@ import Signin from "./Componenets/js/Signin";
 import Dashboard from "./Componenets/js/Dashboard";
 import Navbar from "./Componenets/js/Navbar";
 import Sidenav from "./Componenets/js/Sidenav";
-import TeacherClass from "./Componenets/js/TeacherClass";
+import LearnerList from "./Componenets/js/LearnerList";
 import { useState } from "react";
 import Classcard from "./Componenets/js/Classcard";
+import Teacher from "./Componenets/js/Teacher";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,7 +22,8 @@ function App() {
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/class" element={<Classcard />} />
-              <Route path="/teacher" element={<TeacherClass />} />
+              <Route path="/learnerlist" element={<LearnerList />} />
+              <Route path="/teacher" element={<Teacher />} />
             </Routes>
           </Sidenav>
         </div>
