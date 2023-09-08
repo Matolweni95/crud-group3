@@ -11,6 +11,7 @@ const Sidenav = ({ children }) => {
             <ul className="list-unstyled" id="homeSubmenu">
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/class">Classes</Link>
+              <Link to="/teacher">Teacher</Link>
             </ul>
           </li>
         </ul>

@@ -6,6 +6,7 @@ import Sidenav from "./Componenets/js/Sidenav";
 import LearnerList from "./Componenets/js/LearnerList";
 import { useState } from "react";
 import Classcard from "./Componenets/js/Classcard";
+import Teacher from "./Componenets/js/Teacher";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/class" element={<Classcard />} />
               <Route path="/learnerlist" element={<LearnerList />} />
+              <Route path="/teacher" element={<Teacher />} />
             </Routes>
           </Sidenav>
         </div>
