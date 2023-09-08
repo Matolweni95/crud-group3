@@ -1,7 +1,7 @@
 import React from "react";
-import "../css/Teacher.css";
+import "../css/TeacherClass.css";
 
-const Teacher = () => {
+const TeacherClass = () => {
   return (
     <div className="">
       <table className="">
@@ -31,4 +31,4 @@ const Teacher = () => {
   );
 };
 
-export default Teacher;
+export default TeacherClass;
