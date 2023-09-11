@@ -1,26 +1,43 @@
 import { Link } from 'react-router-dom';
 import '../css/Teacher.css'
 import React, { useState,useRef  } from 'react';
+import { supabase } from './Supabase';
+
 
 function Teacher() {
-  const initialState = {
-    marks: "",
-  };
-
-  const [markData, setMarkData] = useState(initialState);
+  
+  const [markData, setMarkData] = useState('');
   const [marksList, setMarksList] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
+  const [markError, setMarkError] = useState(null);
   const formRef = useRef(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+     if(!markData){
+      setMarkError('please enter a valid mark')
+      return alert('enter valid mark')
+     }
+
+     const { data, error } = await supabase.from('Mark').insert([{ Mark: markData }]);
+     
+
+
+if(error){
+  console.log(error)
+}
+if(data){
+  console.log(data)
+  setMarkError(null)
+}
+
+
     let markValue = event.target.mark.value;
-
-
     setMarksList([...marksList, markValue]);
     formRef.current.reset();
    
-  };
+};
 
 
 
@@ -41,10 +58,12 @@ function Teacher() {
             <form onSubmit={handleSubmit} id="markForm" ref={formRef}>
                 <div class="mb-3">
                     <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         placeholder="Add Mark"
                         id="mark"
+                        value={markData}
+                        onChange={(e)=>setMarkData(e.target.value)}
                       
                     />
                 </div>
