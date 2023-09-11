@@ -1,49 +1,33 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import '../css/Signin.css';
-import { Link } from 'react-router-dom';
-import { supabase } from './Supabase.js';
+import { Alert } from "react-bootstrap";
+import { supabase } from './Supabase'; // Import supabase if it's not already imported
 
-const Signin = ({setIsLoggedIn}) => {
+const Signin = ({ setIsLoggedIn }) => {
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const [error, setError] = useState('');
-  const [showError, setShowError] = useState(null);
+  const handleLogin = async (event) => {
+    event.preventDefault();
 
-/*const handleLogin = () => {
-    setIsLoggedIn(true); 
-};*/
+    setLoading(true);
 
-
-const handleLogin = async () => {
-  //const name = document.getElementById('username').value; // Get username from user input
-  const password = document.getElementById('password').value; // Get password from user input
-
-  try {
-  
-      const { data, error } = await supabase
-      .from('User')
-      .select('UserID')
+    const { data, error } = await  supabase.auth.signInWithPassword({
+      email: user,
+      password: password,
+    });
 
     if (error) {
-      throw new Error('Authentication failed');
+      setErrorMsg(error.error_description || error.message);
+    } else {
+      setIsLoggedIn(true);
     }
 
-    // Assuming authentication was successful
-    const jwtToken = data.access_token;
+    setLoading(false);
+  };
 
-    // Log the token or set it in your app's state for authentication
-    console.log('JWT Token:', jwtToken);
-
-    // Set isLoggedIn to true to indicate successful login
-    setIsLoggedIn(true);
-  } catch (error) {
-    console.error('Sign-in error:', error);
-    // Handle authentication errors, display error messages.
-    setError('Authentication failed. Please check your username and password.');
-    setShowError(true);
-  }
-};
-
-    
   return (
     <div className='login'>
       <div className="login__card">
@@ -54,23 +38,47 @@ const handleLogin = async () => {
           <form onSubmit={handleLogin}>
             <div className="form__group">
               <label htmlFor="username">Username</label>
-              <input type="text" id="username" name="username" required="" />
+              <input
+                type="text"
+                id="username"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+                required=""
+              />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" name="password" required="" />
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required=""
+              />
             </div>
             <div className="form__group">
-            <Link to= "/dashboard">
-                <button onClick={handleLogin} className="login__button">Login</button>
-            </Link>
+              <button type="submit" className="login__button">
+                Login
+              </button>
             </div>
+            <div>
+            <button className={'button block'} disabled={loading}>
+              {loading ? <span>Loading</span> : <span>Send magic link</span>}
+            </button>
+          </div>
           </form>
+          {errorMsg && (
+            <Alert
+              variant="danger"
+              onClose={() => setErrorMsg("")}
+              dismissible>
+              {errorMsg}
+            </Alert>
+          )}
         </div>
       </div>
-
     </div>
-  )
+  );
 }
 
 export default Signin;
