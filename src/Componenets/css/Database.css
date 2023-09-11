@@ -1,0 +1,38 @@
+/* Basic styling for the container */
+.database_table {
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 10px 5px rgb(199, 185, 185);
+  width: 100%;
+  max-width: 800px;
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Centers vertically on the viewport */
+}
+
+.bordered-table {
+  border-collapse: collapse; /* Collapse borders between cells */
+  width: 100%; /* Set table width to 100% of its container */
+}
+
+.bordered-table th,
+.bordered-table td {
+  border: 1px solid black; /* Add border to table cells */
+  padding: 8px; /* Add padding to create some space within cells */
+  text-align: center; /* Center text within cells */
+}
+
+.bordered-table th {
+  background-color: #f2f2f2; /* Add background color to header cells */
+}
+
+/* @media screen and (max-width: 768px) {
+  .smoothies_list {
+    flex-direction: column; 
+    align-items: center;
+  }
+} */
