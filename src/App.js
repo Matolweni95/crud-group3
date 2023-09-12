@@ -31,22 +31,22 @@ function App() {
   return (
     <MyContext.Provider value={{contextValue, updateContextValue}}>
     <BrowserRouter>
-      
-        {!isLoggedIn && <Signin setIsLoggedIn={setIsLoggedIn} />}
-        {isLoggedIn && (
-          <div>
-            <Navbar />
-            <Sidenav>
-              <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/class" element={<Classcard />} />
-                <Route path="/learnerlist" element={<LearnerList />} />
-                <Route path="/teacher" element={<Teacher />} />
-              </Routes>
-            </Sidenav>
-          </div>
-        )}
-      
+
+      {!isLoggedIn && <Signin setIsLoggedIn={setIsLoggedIn} />}
+      {isLoggedIn && (
+        <div>
+          <Navbar />
+          <Sidenav>
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/class" element={<Classcard />} />
+              <Route path="/learnerlist" element={<LearnerList />} />
+              <Route path="/:id" element={<Teacher />} />
+            </Routes>
+          </Sidenav>
+        </div>
+      )}
+
     </BrowserRouter>
     </MyContext.Provider>
   );
