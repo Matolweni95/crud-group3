@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../css/Teacher.css'
-import React, { useState,useRef  } from 'react';
+import React, { useState,useRef,useEffect  } from 'react';
 import { supabase } from './Supabase';
 
 
@@ -13,32 +13,34 @@ function Teacher() {
   const formRef = useRef(null);
 
   const handleSubmit = async (event) => {
+
     event.preventDefault();
-
-     if(!markData){
-      setMarkError('please enter a valid mark')
-      return alert('enter valid mark')
-     }
-
-     const { data, error } = await supabase.from('Mark').insert([{ Mark: markData }]);
-     
-
-
-if(error){
-  console.log(error)
-}
-if(data){
-  console.log(data)
-  setMarkError(null)
-}
-
-
+  
+    if (!markData) {
+      setMarkError('please enter a valid mark');
+      return alert('enter a valid mark');
+    }
+  
+    const { data, error } = await supabase.from('Mark').insert([{ Mark: markData }]);
+  
+    console.log("Data:", data);
+    console.log("Error:", error); 
+  
+    if (error) {
+      console.log(error);
+    }
+  
+    if (data) {
+      console.log(data);
+      setMarkError(null);
+    }
+  
     let markValue = event.target.mark.value;
     setMarksList([...marksList, markValue]);
     formRef.current.reset();
-   
-};
-
+  };
+  
+  
 
 
   const handleChange = (newValue, index) => {
@@ -50,6 +52,33 @@ if(data){
   const handleEdit = (index) => {
     setEditIndex(index);
   };
+
+
+  useEffect(() => {
+  const  fetchMarks =  async()=> {
+      try {
+        const { data, error } = await supabase.from('Mark').select('Mark');
+        if (error) {
+          console.error('Error fetching marks:', error);
+        } else {
+         
+          setMarksList(data);
+        }
+      } catch (error) {
+        console.error('Error fetching marks:', error);
+      }
+    }
+
+    fetchMarks();
+  }, []);
+
+ 
+
+
+
+
+
+
   return (
     <div class="container">
     <div class="row">
@@ -89,12 +118,13 @@ if(data){
                     </tr>
                 </thead>
                 <tbody id="marksList">
+
                 {marksList.map((mark, index) => (
                 <tr key={index}>
                   <td>Learner {index + 1}</td>
                   <td>  <input
             type="text"
-            value={marksList[index]}
+            value={mark.Mark}
             onChange={(e) => handleChange(e.target.value, index)}
             disabled={index !== editIndex} 
             className='markInput'
@@ -105,10 +135,15 @@ if(data){
             <button onClick={() => setEditIndex(null)} className='editBtn'>Save</button>
           ) : (
             <button onClick={() => handleEdit(index)}  className='editBtn'>Edit</button>
+         
           )}</td>
-                 
+            
                 </tr>
+                
+
               ))}
+
+                 
                 </tbody>
             </table>
         </div>
