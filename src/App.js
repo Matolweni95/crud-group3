@@ -7,6 +7,7 @@ import Sidenav from "./Componenets/js/Sidenav";
 import LearnerList from "./Componenets/js/LearnerList";
 import Classcard from "./Componenets/js/Classcard";
 import Teacher from "./Componenets/js/Teacher";
+import Add from "./Componenets/js/Add";
 
 export const MyContext = createContext({});
 
@@ -40,6 +41,7 @@ function App() {
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/class" element={<Classcard />} />
+              <Route path="/add" element={<Add/>} />
               <Route path="/learnerlist" element={<LearnerList />} />
               <Route path="/:id" element={<Teacher />} />
             </Routes>
