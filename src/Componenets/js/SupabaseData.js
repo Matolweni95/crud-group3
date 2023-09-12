@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import DatabaseTable from "./DatabaseTable";
 import "../css/Database.css";
 
-const SupaDatabase = () => {
+const SupabaseData = () => {
   const [fetchError, setFetchError] = useState(null);
   const [group3, setGroup3] = useState([]);
 
