@@ -23,7 +23,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/class" element={<Classcard />} />
               <Route path="/learnerlist" element={<LearnerList />} />
-              <Route path="/teacher" element={<Teacher />} />
+              <Route path="/:id" element={<Teacher />} />
             </Routes>
           </Sidenav>
         </div>

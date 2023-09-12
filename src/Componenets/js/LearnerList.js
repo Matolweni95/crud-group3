@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../css/LearnerList.css';
 import { Link } from 'react-router-dom'
+
 import { supabase } from './Supabase';
 
 
 function LearnerList() {
-
+ 
     const [learners, setLearners] = useState([])
 
     useEffect(() => {
@@ -53,13 +54,16 @@ function LearnerList() {
                             <div className='create-container'>
                                 <div className='elements'>
                                     <div>
-                                        <p>{Learner.Name}</p>
+                                        <p>{Learner.Name}{Learner.LearnerID}</p>
                                     </div>
                                     <div>
                                         <p>{Learner.Surname}</p>
                                     </div>
+                                    <div>
+                                        <p>{Learner.Marks}</p>
+                                    </div>
                                     <div className='icons'>
-                                        <Link to='/teacher'>View</Link>
+                                        <Link to={'/'+Learner.LearnerID}>View</Link>
                                         <i onClick={() => handleDeleteClick(Learner.LearnerID)}>Delete</i>
 
                                     </div>
