@@ -2,48 +2,59 @@ import React, {useEffect, useState} from 'react';
 import '../css/Signin.css';
 import { Link } from 'react-router-dom';
 import { supabase } from './Supabase.js';
+import { useContext } from 'react';
+import { MyContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
 
 const Signin = ({setIsLoggedIn}) => {
 
-  const [error, setError] = useState('');
-  const [showError, setShowError] = useState(null);
+ //variable initalization
+  const [testdata, setData] = useState([]);
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
-/*const handleLogin = () => {
-    setIsLoggedIn(true); 
-};*/
-
-
-const handleLogin = async () => {
-  //const name = document.getElementById('username').value; // Get username from user input
-  const password = document.getElementById('password').value; // Get password from user input
-
-  try {
+  //useContext initialization to set global id
+  const { contextValue, updateContextValue } = useContext(MyContext);
   
-      const { data, error } = await supabase
-      .from('User')
-      .select('UserID')
+  //initailize navigation
+  const navigate = useNavigate();
 
-    if (error) {
-      throw new Error('Authentication failed');
-    }
+const handleLogin = async (e) => {
+  e.preventDefault()
 
-    // Assuming authentication was successful
-    const jwtToken = data.access_token;
-
-    // Log the token or set it in your app's state for authentication
-    console.log('JWT Token:', jwtToken);
-
-    // Set isLoggedIn to true to indicate successful login
-    setIsLoggedIn(true);
-  } catch (error) {
-    console.error('Sign-in error:', error);
-    // Handle authentication errors, display error messages.
-    setError('Authentication failed. Please check your username and password.');
-    setShowError(true);
+  //fetch data from db to compare
+  async function fetch() {
+      try {
+          const { data: user, error } = await supabase.from('User').select('Name, Password, UserID').eq('Name', username).single()
+          if (error) {
+              console.log('error')
+          }
+          else {
+              setData(user)
+              //once fetched set data to variables to use for validation
+              const storedPassword = user.Password;
+              const storedUsername = user.Name;   
+              const storedUserID = user.UserID
+              if (storedPassword == password && storedUsername == username){
+                console.log('success')
+                updateContextValue(storedUserID)
+                localStorage.setItem('isLoggedIn', 'true');
+                navigate('/dashboard')
+                window.location.reload();
+                // setIsLoggedIn(true)
+              }else {
+                console.log('failed to authenticate')
+              }
+          }
+      } catch (error) {
+        alert('failed to fetch the learners!')
+      }
+  } fetch()
+  console.log(testdata)
+  
+  
   }
-};
 
-    
   return (
     <div className='login'>
       <div className="login__card">
@@ -54,11 +65,17 @@ const handleLogin = async () => {
           <form onSubmit={handleLogin}>
             <div className="form__group">
               <label htmlFor="username">Username</label>
-              <input type="text" id="username" name="username" required="" />
+              <input type="text" id="username" name="username" required="" 
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" name="password" required="" />
+              <input type="password" id="password" name="password" required=""
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <div className="form__group">
             <Link to= "/dashboard">
