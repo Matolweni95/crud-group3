@@ -8,6 +8,7 @@ import LearnerList from "./Componenets/js/LearnerList";
 import Classcard from "./Componenets/js/Classcard";
 import Teacher from "./Componenets/js/Teacher";
 
+
 export const MyContext = createContext({});
 
 function App() {
@@ -46,8 +47,8 @@ function App() {
             </Sidenav>
           </div>
         )}
-      
     </BrowserRouter>
+
     </MyContext.Provider>
   );
 }
