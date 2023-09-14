@@ -18,7 +18,7 @@ function Add() {
     const { name, surname, marks } = learnerData;
 
   
-    if (!name || !surname || isNaN(marks)) {
+    if (!name || !surname || !marks) {
       return alert('Please enter valid learner details');
     }
 
@@ -45,43 +45,54 @@ function Add() {
   
 
   return (
-    <div className="container">
+   /* <div className="container">
       <div className="row">
-        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2>ADD LEARNER DETAILS</h2>
-          <form onSubmit={handleSubmit} id="learnerForm">
-            <div className="mb-3">
+        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">*/
+    <div class="form">
+      <div class="subtitle">Add learner mark</div>
+      <form onSubmit={handleSubmit} id="learnerForm">
+      <div class="input-container ic1">
+        <input
+          id='firstname'
+          type="text"
+          className= "input"
+          placeholder=""
+          value={learnerData.name}
+          onChange={(e) => setLearnerData({ ...learnerData, name: e.target.value })}
+        />
+        <div class="cut"></div>
+        <label for="firstname" class="placeholder">First name</label>
+              
+
+              <label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter name"
-                value={learnerData.name}
-                onChange={(e) => setLearnerData({ ...learnerData, name: e.target.value })}
-              />
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter surname"
+                placeholder=" "
                 value={learnerData.surname}
                 onChange={(e) => setLearnerData({ ...learnerData, surname: e.target.value })}
               />
+              <span>Lastname:</span>
+              </label>
+
+              <label>
               <input
-                type="number"
+                type="text"
                 className="form-control"
-                placeholder="Add Mark"
+                placeholder=" "
                 value={learnerData.marks}
                 onChange={(e) => setLearnerData({ ...learnerData, marks: parseInt(e.target.value) })}
               />
+              <span>Mark:</span>
+              </label>
             </div>
             <div className="Buttons">
               <button type="submit" className="btn btn-outline-primary mx-2">
-               submit
+               Add
               </button>
             </div>
           </form>
         </div>
-      </div>
-    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { supabase } from './Supabase.js';
 import { useContext } from 'react';
 import { MyContext } from '../../App';
+import bcrypt from 'bcryptjs'; // Import the bcrypt library
 import { useNavigate } from 'react-router-dom';
 
 const Signin = ({setIsLoggedIn}) => {
@@ -35,7 +36,8 @@ const handleLogin = async (e) => {
               const storedPassword = user.Password;
               const storedUsername = user.Name;   
               const storedUserID = user.UserID
-              if (storedPassword == password && storedUsername == username){
+              const hashedPassword = bcrypt.hashSync(password, 10); // 10 is the saltRounds
+              if (storedUsername === username || bcrypt.compare(password,storedPassword)){
                 console.log('success')
                 updateContextValue(storedUserID)
                 localStorage.setItem('isLoggedIn', 'true');
@@ -83,6 +85,10 @@ const handleLogin = async (e) => {
             </Link>
             </div>
           </form>
+          <div>
+          Don't have an account?{' '}
+            <Link to="/signup">Signup here.</Link>
+          </div>
         </div>
       </div>
 
