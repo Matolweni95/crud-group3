@@ -39,7 +39,7 @@ function App() {
       {!isLoggedIn && (
           <Routes>
             <Route path="/signup" element={<Signup />} />
-            <Route path="/signin" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
+            <Route path="/" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
           </Routes>
         )}
 
