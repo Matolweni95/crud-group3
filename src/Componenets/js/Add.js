@@ -7,6 +7,7 @@ function Add() {
     name: "",
     surname: "",
     marks: 0, 
+    id:0,
   }
 
   const [learnerData, setLearnerData] = useState(initialState);
@@ -15,19 +16,20 @@ function Add() {
     event.preventDefault();
 
     
-    const { name, surname, marks } = learnerData;
+    const { name, surname, marks,id } = learnerData;
 
   
-    if (!name || !surname || isNaN(marks)) {
+    if (!name || !surname || isNaN(marks) || !id) {
       return alert('Please enter valid learner details');
     }
 
     try {
-      const { data, error } = await supabase.from('Learner').insert([
+      const { data, error } = await supabase.from('Class_List').insert([
         {
           Name: name,
           Surname: surname,
           Marks: marks,
+          ClassID: id,
         },
       ]);
 
@@ -71,6 +73,13 @@ function Add() {
                 placeholder="Add Mark"
                 value={learnerData.marks}
                 onChange={(e) => setLearnerData({ ...learnerData, marks: parseInt(e.target.value) })}
+              />
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Add class"
+                value={learnerData.id}
+                onChange={(e) => setLearnerData({ ...learnerData, id: parseInt(e.target.value) })}
               />
             </div>
             <div className="Buttons">
