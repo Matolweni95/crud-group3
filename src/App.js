@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signin from "./Componenets/js/Signin";
+import Signup from "./Componenets/js/Signup";
 import Dashboard from "./Componenets/js/Dashboard";
 import Navbar from "./Componenets/js/Navbar";
 import Sidenav from "./Componenets/js/Sidenav";
@@ -33,7 +34,15 @@ function App() {
     <MyContext.Provider value={{contextValue, updateContextValue}}>
     <BrowserRouter>
 
-      {!isLoggedIn && <Signin setIsLoggedIn={setIsLoggedIn} />}
+      {/* {!isLoggedIn && <Signin setIsLoggedIn={setIsLoggedIn} />} */}
+
+      {!isLoggedIn && (
+          <Routes>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signin" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
+          </Routes>
+        )}
+
       {isLoggedIn && (
         <div>
           <Navbar />
@@ -41,7 +50,7 @@ function App() {
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/class" element={<Classcard />} />
-              <Route path="/add" element={<Add/>} />
+              <Route path="/add" element={<Add/>} /> 
               <Route path="/learnerlist" element={<LearnerList />} />
               <Route path="/:id" element={<Teacher />} />
             </Routes>
