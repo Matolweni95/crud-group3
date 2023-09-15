@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import '../css/LearnerList.css';
 import { Link } from 'react-router-dom'
-
+import { MyContext } from '../../App';
+import { useContext } from 'react';
 import { supabase } from './Supabase';
 
 
 function LearnerList() {
  
     const [learners, setLearners] = useState([])
+    const {contextValue, updateContextValue} = useContext(MyContext);
 
     useEffect(() => {
         async function fetchLearners() {
             try {
-                const { data, error } = await supabase.from('Learner').select('*')
+                const { data, error } = await supabase.from('Class_List').select('*').eq('ClassID', contextValue)
 
                 if (error) {
                     console.log('error')
@@ -27,6 +29,7 @@ function LearnerList() {
             }
         }
         fetchLearners()
+     
 
     }, [])
     const handleDeleteClick = async (id) => {
