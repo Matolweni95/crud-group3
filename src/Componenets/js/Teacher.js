@@ -11,6 +11,7 @@ function Teacher() {
   const [mark, setMark] = useState("");
   const [formError, setFormError] = useState(null);
 
+
   //   const [markData, setMarkData] = useState('');
   //   const [marksList, setMarksList] = useState([]);
   //   const [editIndex, setEditIndex] = useState(null);
@@ -62,9 +63,9 @@ function Teacher() {
     }
 
     const { data, error } = await supabase
-      .from("Learner")
+      .from("Class_List")
       .update({ Name: name, Surname: surname, Marks: mark })
-      .eq("LearnerID", id)
+      .eq('MarkID',id)
       .select();
 
     if (error) {
@@ -73,14 +74,15 @@ function Teacher() {
     if (data) {
       setFormError(null);
     }
+    navigate("/learnerlist")
   };
 
   useEffect(() => {
     const fetchMarks = async () => {
       const { data, error } = await supabase
-        .from("Learner")
+        .from("Class_List")
         .select()
-        .eq("LearnerID", id)
+        .eq('MarkID',id)
         .single();
 
       if (error) {

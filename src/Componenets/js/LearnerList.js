@@ -10,12 +10,12 @@ function LearnerList() {
  
     const [learners, setLearners] = useState([])
     const {contextValue, updateContextValue} = useContext(MyContext);
-
+   
     useEffect(() => {
         async function fetchLearners() {
             try {
                 const { data, error } = await supabase.from('Class_List').select('*').eq('ClassID', contextValue)
-
+              
                 if (error) {
                     console.log('error')
                 }
@@ -57,7 +57,7 @@ function LearnerList() {
                             <div className='create-container'>
                                 <div className='elements'>
                                     <div>
-                                        <p>{Learner.Name}{Learner.LearnerID}</p>
+                                        <p>{Learner.Name}{Learner.MarkID}</p>
                                     </div>
                                     <div>
                                         <p>{Learner.Surname}</p>
@@ -66,7 +66,7 @@ function LearnerList() {
                                         <p>{Learner.Marks}</p>
                                     </div>
                                     <div className='icons'>
-                                        <Link to={'/'+Learner.LearnerID}>View</Link>
+                                        <Link to={'/'+Learner.MarkID}>View</Link>
                                         <i onClick={() => handleDeleteClick(Learner.LearnerID)}>Delete</i>
 
                                     </div>
